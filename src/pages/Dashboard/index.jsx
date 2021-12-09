@@ -18,12 +18,12 @@ function Dashboard(authenticated) {
 
   function loadTask() {
     api
-      .get("/taks", {
-        headers: {
-          Authorization: `Bearer: ${token}`,
-        },
+      .get("/task", {
         params: {
           completed: false,
+        },
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
       })
       .then((response) => {
@@ -52,12 +52,10 @@ function Dashboard(authenticated) {
     api
       .post(
         "/task",
-        {
-          description: task,
-        },
+        { description: task },
         {
           headers: {
-            Authorization: `Bearer: ${token}`,
+            Authorization: `Bearer ${token}`,
           },
         }
       )
@@ -73,7 +71,7 @@ function Dashboard(authenticated) {
         { completed: true },
         {
           headers: {
-            Authorization: `Bearer: ${token}`,
+            Authorization: `Bearer ${token}`,
           },
         }
       )
@@ -84,6 +82,7 @@ function Dashboard(authenticated) {
     return <Redirect to="/login" />;
   }
 
+  console.log(tasks);
   return (
     <Container>
       <InputContainer onSubmit={handleSubmit(onSubmit)}>
@@ -95,7 +94,7 @@ function Dashboard(authenticated) {
             register={register}
             name="task"
           />
-          <Button type="submit">Adivionar</Button>
+          <Button type="submit">Adicionar</Button>
         </section>
       </InputContainer>
       <TaskContainer>
